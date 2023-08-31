@@ -20,10 +20,8 @@ class Solution(object):
         #     nums.append
         length = len(nums)
         visited = [False] * length
-        permutation = []
         def permuteArr(nums, perms):
             if (len(perms) == length):
-                print(perms)
                 self.result.append(perms[::])
                 return
             for i in range(0, len(nums)):
@@ -34,5 +32,4 @@ class Solution(object):
                     perms.pop()
                     visited[i] = False
         permuteArr(nums, [])
-        print(self.result)
         return self.result
