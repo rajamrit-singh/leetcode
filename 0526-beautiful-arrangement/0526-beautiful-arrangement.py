@@ -1,3 +1,6 @@
+# This is almost same as checking all permutations, with on minor change. Here if in the backtracking tree
+# one of the numbers don't satisfy the condition, then no need to check for it.
+
 class Solution(object):
 
     def __init__(self):
