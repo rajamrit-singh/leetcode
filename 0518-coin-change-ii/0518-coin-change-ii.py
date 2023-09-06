@@ -1,30 +1,22 @@
 class Solution:
-
-    def __init__(self):
-        self.result = 0
-        self.memo = {}
-
-    def change(self, amount: int, coins) -> int:
+    def change(self, amount: int, coins: List[int]) -> int:
         if (amount == 0):
             return 1
+        dp = [0 for i in range(0, amount + 1)]
+        row = [0 for i in range(0, amount + 1)]
+        # We will follow a bottom up approach 
+        for i in range(len(coins) - 1, -1, -1):
+            dp = row[::]
+            # We only need the data from below row. Once we have passed a row
+            # it will become the dp for next row
+            for curAmt in range(1, amount + 1, 1):
+                amt = curAmt - coins[i]
+                if (amt < 0):
+                    row[curAmt] = 0
+                elif (amt == 0):
+                    row[curAmt] = 1
+                else:
+                    row[curAmt] = row[amt]
+                row[curAmt] += dp[curAmt]
 
-        def dfs(coins, amt, index):
-            if (amt < 0):
-                return 0
-            if (amt == 0):
-                return 1
-            if ((amt, index) in self.memo):
-                return self.memo.get((amt, index))
-
-
-            total = 0
-
-            for i in range(index, len(coins)):
-                # We are passing the index so that in we don't get repitions
-                a = dfs(coins, amt - coins[i], i)
-                total += a
-            self.memo[(amt, index)] = total
-            return total
-        return dfs(coins, amount, 0)
-        # answer = self.memo.get((amount, 0)) or 0
-        # return answer
+        return row[amount]
