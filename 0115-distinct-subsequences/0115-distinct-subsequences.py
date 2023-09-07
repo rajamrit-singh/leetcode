@@ -4,8 +4,8 @@ class Solution:
         self.memo = {}
         def dfs(current, index):
             length = len(current)
-            # if (current != t[:length]):
-            #     return 0
+            if (current != t[:length]):
+                return 0
             if((current, index) in self.memo):
                 return self.memo.get((current, index))
             if (current == t):
