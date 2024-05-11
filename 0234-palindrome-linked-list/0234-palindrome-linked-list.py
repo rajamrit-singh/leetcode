@@ -5,36 +5,34 @@
 #         self.next = next
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        if head is None or head.next is None:
+        if (head == None or head.next == None):
             return True
-        
-        # Find the middle of the linked list
-        slow = head
-        fast = head
-        while fast.next and fast.next.next:
-            slow = slow.next
-            fast = fast.next.next
-        
-        # Reverse the second half of the linked list
-        second_half = self.reverseLinkedList(slow.next)
-        
-        # Compare the first and second halves
-        while second_half:
-            if head.val != second_half.val:
+
+        slowPtr = head
+        fastPtr = head
+        while fastPtr.next and fastPtr.next.next:
+            slowPtr = slowPtr.next
+            fastPtr = fastPtr.next.next
+        slowPtr = slowPtr.next
+
+        reversedLL = self.reverseLinkedList(slowPtr)
+        while (reversedLL):
+            if(reversedLL.val != head.val):
                 return False
+            reversedLL = reversedLL.next
             head = head.next
-            second_half = second_half.next
-        
         return True
+        
+    
+
     
     def reverseLinkedList(self, node):
         prev = None
         current = node
         
-        while current:
+        while(current != None):
             nextNode = current.next
             current.next = prev
             prev = current
             current = nextNode
-        
         return prev
