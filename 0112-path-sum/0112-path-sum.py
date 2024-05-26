@@ -20,5 +20,3 @@ class Solution:
         self.checkSum(root.right, cur)
         if (not root.left and not root.right and not self.sumExist):
             self.sumExist = cur == self.targetSum
-            # if (self.sumExist):
-            #     return
